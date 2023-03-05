@@ -8,7 +8,7 @@ public final class AuthenticationMapping {
     public static AuthenticationResponse mapToResponse(AuthenticationResult result) {
 
         return new AuthenticationResponse(
-                result.user().getId(),
+                result.user().getId().getValue(),
                 result.user().getFirstName(),
                 result.user().getLastName(),
                 result.user().getEmail(),

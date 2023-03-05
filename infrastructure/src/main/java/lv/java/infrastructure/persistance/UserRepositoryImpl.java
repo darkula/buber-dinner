@@ -1,7 +1,7 @@
 package lv.java.infrastructure.persistance;
 
 import lv.java.application.common.interfaces.persistance.UserRepository;
-import lv.java.domain.entities.User;
+import lv.java.domain.user.User;
 
 import java.util.ArrayList;
 import java.util.List;

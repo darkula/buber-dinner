@@ -1,6 +1,6 @@
 package lv.java.application.authentication.common;
 
-import lv.java.domain.entities.User;
+import lv.java.domain.user.User;
 
 public record AuthenticationResult(User user, String token) {
 }

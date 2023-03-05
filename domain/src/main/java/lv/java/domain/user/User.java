@@ -1,24 +1,24 @@
-package lv.java.domain.entities;
+package lv.java.domain.user;
 
-import java.util.UUID;
+import lv.java.domain.common.models.AggregateRoot;
+import lv.java.domain.user.value_objects.UserId;
 
-public class User {
-    private final UUID id;
+import java.time.LocalDateTime;
+
+public final class User extends AggregateRoot<UserId> {
     private final String firstName;
     private final String lastName;
     private final String email;
     private final String password;
+    private LocalDateTime createdDateTime;
+    private LocalDateTime updatedDateTime;
 
     public User(String firstName, String lastName, String email, String password) {
-        this.id = UUID.randomUUID();
+        super(UserId.createUnique());
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-    }
-
-    public UUID getId() {
-        return id;
     }
 
     public String getPassword() {

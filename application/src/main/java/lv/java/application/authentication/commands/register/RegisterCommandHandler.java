@@ -7,7 +7,7 @@ import lv.java.application.common.interfaces.authentication.JwtTokenGenerator;
 import lv.java.application.common.interfaces.persistance.UserRepository;
 import lv.java.domain.common.error.Result;
 import lv.java.domain.common.error.UserError;
-import lv.java.domain.entities.User;
+import lv.java.domain.user.User;
 
 import java.util.Objects;
 import java.util.Optional;

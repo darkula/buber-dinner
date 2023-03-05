@@ -7,7 +7,7 @@ import lv.java.application.common.interfaces.persistance.UserRepository;
 import lv.java.application.authentication.common.AuthenticationResult;
 import lv.java.domain.common.error.AuthenticationError;
 import lv.java.domain.common.error.Result;
-import lv.java.domain.entities.User;
+import lv.java.domain.user.User;
 
 import java.util.Objects;
 import java.util.Optional;

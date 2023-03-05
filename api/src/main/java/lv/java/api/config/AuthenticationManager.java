@@ -2,7 +2,7 @@ package lv.java.api.config;
 
 import lv.java.application.common.interfaces.authentication.JwtTokenGenerator;
 import lv.java.application.common.interfaces.persistance.UserRepository;
-import lv.java.domain.entities.User;
+import lv.java.domain.user.User;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
