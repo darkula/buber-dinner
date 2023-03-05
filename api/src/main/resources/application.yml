@@ -1,0 +1,5 @@
+jwt-settings:
+  secret: "top-secret"
+  expiry-minutes: 60
+  issuer: "IBuberDinner"
+  audience: "ABuberDinner"

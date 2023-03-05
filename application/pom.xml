@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>lv.java</groupId>
+        <artifactId>buber-dinner</artifactId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>application</artifactId>
+    <version>1.0.0</version>
+    <name>application</name>
+    <description>application</description>
+    <dependencies>
+        <dependency>
+            <groupId>lv.java</groupId>
+            <artifactId>domain</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sizovs</groupId>
+            <artifactId>pipelinr</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.mvallim</groupId>
+            <artifactId>java-fluent-validator</artifactId>
+        </dependency>
+    </dependencies>
+</project>

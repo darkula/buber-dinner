@@ -1,0 +1,9 @@
+POST localhost:8080/auth/register
+Content-Type: application/json
+
+{
+"firstName":"buber",
+"lastName":"dinner",
+"email":"bubber.dinner@email.com",
+"password":"password1234"
+}
