@@ -3,7 +3,7 @@ package lv.java.api.config;
 import lombok.extern.slf4j.Slf4j;
 import lv.java.application.common.interfaces.authentication.JwtTokenGenerator;
 import lv.java.application.common.interfaces.persistance.UserRepository;
-import lv.java.domain.entities.User;
+import lv.java.domain.user.User;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;

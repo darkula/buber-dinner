@@ -1,6 +1,6 @@
 package lv.java.application.common.interfaces.persistance;
 
-import lv.java.domain.entities.User;
+import lv.java.domain.user.User;
 
 import java.util.Optional;
 
