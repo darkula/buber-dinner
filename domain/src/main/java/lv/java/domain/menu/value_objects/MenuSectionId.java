@@ -7,14 +7,14 @@ import java.util.UUID;
 
 @Getter
 public final class MenuSectionId extends ValueObject {
-    private final UUID value;
+    private final String value;
 
-    private MenuSectionId(UUID value) {
+    private MenuSectionId(String value) {
         this.value = value;
     }
 
     public static MenuSectionId createUnique() {
-        return new MenuSectionId(UUID.randomUUID());
+        return new MenuSectionId(UUID.randomUUID().toString());
     }
 
 }

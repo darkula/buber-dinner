@@ -5,17 +5,21 @@ import lv.java.domain.common.models.ValueObject;
 import java.util.UUID;
 
 public final class HostId extends ValueObject {
-    private final UUID value;
+    private final String value;
 
-    private HostId(UUID value) {
+    private HostId(String value) {
         this.value = value;
     }
 
     public static HostId createUnique() {
-        return new HostId(UUID.randomUUID());
+        return new HostId(UUID.randomUUID().toString());
     }
 
-    public UUID getValue() {
+    public static HostId create(String id) {
+        return new HostId(id);
+    }
+
+    public String getValue() {
         return value;
     }
 }

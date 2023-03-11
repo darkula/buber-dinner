@@ -5,17 +5,17 @@ import lv.java.domain.common.models.ValueObject;
 import java.util.UUID;
 
 public final class MenuId extends ValueObject {
-    private final UUID value;
+    private final String value;
 
-    private MenuId(UUID value) {
+    private MenuId(String value) {
         this.value = value;
     }
 
     public static MenuId createUnique() {
-        return new MenuId(UUID.randomUUID());
+        return new MenuId(UUID.randomUUID().toString());
     }
 
-    public UUID getValue() {
+    public String getValue() {
         return value;
     }
 }
