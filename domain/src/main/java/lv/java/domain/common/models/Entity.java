@@ -6,4 +6,8 @@ public class Entity<T> {
     public Entity(T id) {
         this.id = id;
     }
+
+    public T getId() {
+        return id;
+    }
 }

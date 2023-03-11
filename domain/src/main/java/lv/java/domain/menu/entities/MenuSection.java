@@ -6,20 +6,22 @@ import lv.java.domain.menu.value_objects.MenuSectionId;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public final class MenuSection extends Entity<MenuSectionId> {
-    private final List<MenuItem> items = new ArrayList<>();
+    private final List<MenuItem> items;
     private final String name;
     private final String description;
 
-    private MenuSection(MenuSectionId menuSectionId, String name, String description) {
+    private MenuSection(MenuSectionId menuSectionId, String name, String description, List<MenuItem> items) {
         super(menuSectionId);
         this.name = name;
         this.description = description;
+        this.items = Objects.isNull(items) ? new ArrayList<>() : items;
     }
 
-    public static MenuSection create(String name, String description) {
-        return new MenuSection(MenuSectionId.createUnique(), name, description);
+    public static MenuSection create(String name, String description, List<MenuItem> items) {
+        return new MenuSection(MenuSectionId.createUnique(), name, description, items);
     }
 
     public List<MenuItem> getItems() {

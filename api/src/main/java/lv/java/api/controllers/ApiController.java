@@ -1,6 +1,7 @@
 package lv.java.api.controllers;
 
 import lv.java.domain.common.error.Error;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
@@ -31,5 +32,9 @@ public class ApiController {
 
     protected <T> Mono<ResponseEntity<T>> ok(T t) {
         return Mono.just(ResponseEntity.ok(t));
+    }
+
+    protected <T> Mono<ResponseEntity<T>> created(T t) {
+        return Mono.just(ResponseEntity.status(HttpStatus.CREATED).body(t));
     }
 }

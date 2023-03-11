@@ -12,29 +12,31 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public final class Menu extends AggregateRoot<MenuId> {
     private String name;
     private String description;
     private BigDecimal averageRating;
-    private final List<MenuSection> sections = new ArrayList<>();
+    private final List<MenuSection> sections;
     private HostId hostId;
     private final List<DinnerId> dinnerIds = new ArrayList<>();
     private final List<MenuReviewId> menuReviewIds = new ArrayList<>();
     private LocalDateTime createdDateTime;
     private LocalDateTime updatedDateTime;
 
-    private Menu(MenuId menuId, String name, String description, HostId hostId, LocalDateTime createdDateTime, LocalDateTime updatedDateTime) {
+    private Menu(MenuId menuId, String name, String description, HostId hostId, LocalDateTime createdDateTime, LocalDateTime updatedDateTime, List<MenuSection> sections) {
         super(menuId);
         this.name = name;
         this.description = description;
         this.hostId = hostId;
         this.createdDateTime = createdDateTime;
         this.updatedDateTime = updatedDateTime;
+        this.sections = Objects.isNull(sections) ? new ArrayList<>() : sections;
     }
 
-    public static Menu create(String name, String description, HostId hostId) {
-        return new Menu(MenuId.createUnique(), name, description, hostId, LocalDateTime.now(), LocalDateTime.now());
+    public static Menu create(HostId hostId, String name, String description, List<MenuSection> sections) {
+        return new Menu(MenuId.createUnique(), name, description, hostId, LocalDateTime.now(), LocalDateTime.now(), sections);
     }
 
     public List<MenuSection> getSections() {
@@ -63,5 +65,13 @@ public final class Menu extends AggregateRoot<MenuId> {
 
     public List<MenuReviewId> getMenuReviewIds() {
         return Collections.unmodifiableList(menuReviewIds);
+    }
+
+    public LocalDateTime getCreatedDateTime() {
+        return createdDateTime;
+    }
+
+    public LocalDateTime getUpdatedDateTime() {
+        return updatedDateTime;
     }
 }

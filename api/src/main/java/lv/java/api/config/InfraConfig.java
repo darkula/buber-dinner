@@ -8,9 +8,13 @@ import lv.java.application.authentication.queries.login.LoginQueryHandler;
 import lv.java.application.authentication.queries.login.LoginQueryValidator;
 import lv.java.application.common.behaviors.ValidationBehavior;
 import lv.java.application.common.interfaces.authentication.JwtTokenGenerator;
+import lv.java.application.common.interfaces.persistance.MenuRepository;
 import lv.java.application.common.interfaces.persistance.UserRepository;
+import lv.java.application.menus.commands.create_menu.CreateMenuCommandHandler;
+import lv.java.application.menus.commands.create_menu.CreateMenuCommandValidator;
 import lv.java.infrastructure.authentication.JwtSettings;
 import lv.java.infrastructure.authentication.JwtTokenGeneratorImpl;
+import lv.java.infrastructure.persistance.MenuRepositoryImpl;
 import lv.java.infrastructure.persistance.UserRepositoryImpl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -42,15 +46,23 @@ public class InfraConfig {
     }
 
     @Bean
-    public Pipeline initPipeline(JwtTokenGenerator jwtTokenGenerator, UserRepository userRepository) {
+    public MenuRepository initMenuRepository() {
+        return new MenuRepositoryImpl();
+    }
+
+    @Bean
+    public Pipeline initPipeline(JwtTokenGenerator jwtTokenGenerator, UserRepository userRepository, MenuRepository menuRepository) {
 
         return new Pipelinr()
                 .with(
                         () -> Stream.of(
                                 new LoginQueryHandler(jwtTokenGenerator, userRepository),
-                                new RegisterCommandHandler(jwtTokenGenerator, userRepository)))
-                        .
-                with(() -> Stream.of(new ValidationBehavior(List.of(new RegisterCommandValidator(), new LoginQueryValidator()))));
+                                new RegisterCommandHandler(jwtTokenGenerator, userRepository),
+                                new CreateMenuCommandHandler(menuRepository)))
+                .with(() -> Stream.of(new ValidationBehavior(List.of(
+                        new RegisterCommandValidator(),
+                        new LoginQueryValidator(),
+                        new CreateMenuCommandValidator()))));
     }
 
     @Bean
