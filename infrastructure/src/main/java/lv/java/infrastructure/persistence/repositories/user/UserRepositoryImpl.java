@@ -1,4 +1,4 @@
-package lv.java.infrastructure.persistance;
+package lv.java.infrastructure.persistence.repositories.user;
 
 import lv.java.application.common.interfaces.persistance.UserRepository;
 import lv.java.domain.user.User;

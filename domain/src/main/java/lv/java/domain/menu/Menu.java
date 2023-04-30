@@ -33,6 +33,7 @@ public final class Menu extends AggregateRoot<MenuId> {
         this.createdDateTime = createdDateTime;
         this.updatedDateTime = updatedDateTime;
         this.sections = Objects.isNull(sections) ? new ArrayList<>() : sections;
+        this.averageRating = BigDecimal.ZERO;
     }
 
     public static Menu create(HostId hostId, String name, String description, List<MenuSection> sections) {

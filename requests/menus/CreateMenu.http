@@ -1,5 +1,6 @@
 < {%
     request.variables.set("hostId", "some-id")
+    request.variables.set("token", "-")
 %}
 POST localhost:8080/hosts/{{hostId}}/menus
 Content-Type: application/json

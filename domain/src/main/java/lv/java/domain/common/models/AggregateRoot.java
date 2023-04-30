@@ -1,13 +1,9 @@
 package lv.java.domain.common.models;
 
-public class AggregateRoot<T> {
-    private final T id;
+public class AggregateRoot<T> extends Entity<T> {
 
     public AggregateRoot(T id) {
-        this.id = id;
+        super(id);
     }
 
-    public T getId() {
-        return id;
-    }
 }

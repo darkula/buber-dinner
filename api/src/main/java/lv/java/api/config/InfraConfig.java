@@ -14,8 +14,7 @@ import lv.java.application.menus.commands.create_menu.CreateMenuCommandHandler;
 import lv.java.application.menus.commands.create_menu.CreateMenuCommandValidator;
 import lv.java.infrastructure.authentication.JwtSettings;
 import lv.java.infrastructure.authentication.JwtTokenGeneratorImpl;
-import lv.java.infrastructure.persistance.MenuRepositoryImpl;
-import lv.java.infrastructure.persistance.UserRepositoryImpl;
+import lv.java.infrastructure.persistence.repositories.user.UserRepositoryImpl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -43,11 +42,6 @@ public class InfraConfig {
     @Bean
     public UserRepository initUserRepository() {
         return new UserRepositoryImpl();
-    }
-
-    @Bean
-    public MenuRepository initMenuRepository() {
-        return new MenuRepositoryImpl();
     }
 
     @Bean
