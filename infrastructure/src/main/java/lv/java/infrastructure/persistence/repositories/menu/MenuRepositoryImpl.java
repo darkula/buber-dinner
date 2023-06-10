@@ -1,21 +1,33 @@
 package lv.java.infrastructure.persistence.repositories.menu;
 
+import an.awesome.pipelinr.Pipeline;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import lv.java.application.common.interfaces.persistance.MenuRepository;
+import lv.java.domain.common.models.DomainEvent;
 import lv.java.domain.dinner.value_objects.DinnerId;
 import lv.java.domain.menu.Menu;
 import lv.java.domain.menu.entities.MenuItem;
 import lv.java.domain.menu.entities.MenuSection;
 import lv.java.domain.menu_review.value_objects.MenuReviewId;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @Repository
 public class MenuRepositoryImpl implements MenuRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
+    private final Pipeline pipeline;
+
+    public MenuRepositoryImpl(@Qualifier("notificationHandlers") Pipeline pipeline) {
+        this.pipeline = Objects.requireNonNull(pipeline);
+    }
 
     @Override
     @Transactional
@@ -62,6 +74,15 @@ public class MenuRepositoryImpl implements MenuRepository {
                     .setMenuId(menu.getId().getValue())
                     .setMenuReviewId(menuReviewId.getValue());
             this.entityManager.persist(menuReviewIdJpa);
+        }
+
+        List<DomainEvent> domainEvents = new ArrayList<>(menu.getDomainEvents());
+
+        menu.clearDomainEvents();
+
+        for (DomainEvent event : domainEvents) {
+            //Not good, because event happens before transaction, in case of transaction failure false event would be sent.
+            event.send(this.pipeline);
         }
     }
 }

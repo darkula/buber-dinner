@@ -11,4 +11,11 @@
     <version>1.0.0</version>
     <name>domain</name>
     <description>domain</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>net.sizovs</groupId>
+            <artifactId>pipelinr</artifactId>
+        </dependency>
+    </dependencies>
 </project>
