@@ -3,6 +3,7 @@ package lv.java.api.controllers;
 import an.awesome.pipelinr.Pipeline;
 import lv.java.contracts.menus.CreateMenuRequest;
 import lv.java.contracts.menus.MenuResponse;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
@@ -18,7 +19,7 @@ public class MenusController extends ApiController {
 
     private final Pipeline pipeline;
 
-    public MenusController(Pipeline pipeline) {
+    public MenusController(@Qualifier("commandHandlers") Pipeline pipeline) {
         this.pipeline = Objects.requireNonNull(pipeline);
     }
 

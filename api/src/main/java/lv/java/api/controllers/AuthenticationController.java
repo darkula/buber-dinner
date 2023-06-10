@@ -9,6 +9,7 @@ import lv.java.contracts.authentication.AuthenticationResponse;
 import lv.java.contracts.authentication.LoginRequest;
 import lv.java.contracts.authentication.RegisterRequest;
 import lv.java.domain.common.error.Result;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,7 +25,7 @@ public class AuthenticationController extends ApiController {
 
     private final Pipeline pipeline;
 
-    public AuthenticationController(Pipeline pipeline) {
+    public AuthenticationController(@Qualifier("commandHandlers") Pipeline pipeline) {
         this.pipeline = Objects.requireNonNull(pipeline);
     }
 

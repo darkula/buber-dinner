@@ -12,6 +12,7 @@ import lv.java.application.common.interfaces.persistance.MenuRepository;
 import lv.java.application.common.interfaces.persistance.UserRepository;
 import lv.java.application.menus.commands.create_menu.CreateMenuCommandHandler;
 import lv.java.application.menus.commands.create_menu.CreateMenuCommandValidator;
+import lv.java.application.menus.events.MenuCreatedEventHandler;
 import lv.java.infrastructure.authentication.JwtSettings;
 import lv.java.infrastructure.authentication.JwtTokenGeneratorImpl;
 import lv.java.infrastructure.persistence.repositories.user.UserRepositoryImpl;
@@ -45,18 +46,23 @@ public class InfraConfig {
     }
 
     @Bean
-    public Pipeline initPipeline(JwtTokenGenerator jwtTokenGenerator, UserRepository userRepository, MenuRepository menuRepository) {
+    public Pipeline commandHandlers(JwtTokenGenerator jwtTokenGenerator, UserRepository userRepository, MenuRepository menuRepository) {
 
         return new Pipelinr()
-                .with(
-                        () -> Stream.of(
-                                new LoginQueryHandler(jwtTokenGenerator, userRepository),
-                                new RegisterCommandHandler(jwtTokenGenerator, userRepository),
-                                new CreateMenuCommandHandler(menuRepository)))
+                .with(() -> Stream.of(
+                        new RegisterCommandHandler(jwtTokenGenerator, userRepository),
+                        new LoginQueryHandler(jwtTokenGenerator, userRepository),
+                        new CreateMenuCommandHandler(menuRepository)))
                 .with(() -> Stream.of(new ValidationBehavior(List.of(
                         new RegisterCommandValidator(),
                         new LoginQueryValidator(),
                         new CreateMenuCommandValidator()))));
+    }
+
+    @Bean
+    public Pipeline notificationHandlers() {
+        return new Pipelinr()
+                .with(() -> Stream.of(new MenuCreatedEventHandler()));
     }
 
     @Bean

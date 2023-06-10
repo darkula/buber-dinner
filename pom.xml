@@ -13,7 +13,7 @@
         <java.version>17</java.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <spring-boot>3.0.5</spring-boot>
+        <spring-boot>3.1.0</spring-boot>
         <pipelinr>0.8</pipelinr>
         <java-fluent-validator>1.10.0</java-fluent-validator>
         <jjwt>0.9.1</jjwt>

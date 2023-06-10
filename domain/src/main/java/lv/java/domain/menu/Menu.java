@@ -4,6 +4,7 @@ import lv.java.domain.common.models.AggregateRoot;
 import lv.java.domain.dinner.value_objects.DinnerId;
 import lv.java.domain.host.value_objects.HostId;
 import lv.java.domain.menu.entities.MenuSection;
+import lv.java.domain.menu.events.MenuCreated;
 import lv.java.domain.menu.value_objects.MenuId;
 import lv.java.domain.menu_review.value_objects.MenuReviewId;
 
@@ -37,7 +38,10 @@ public final class Menu extends AggregateRoot<MenuId> {
     }
 
     public static Menu create(HostId hostId, String name, String description, List<MenuSection> sections) {
-        return new Menu(MenuId.createUnique(), name, description, hostId, LocalDateTime.now(), LocalDateTime.now(), sections);
+        var menu = new Menu(MenuId.createUnique(), name, description, hostId, LocalDateTime.now(), LocalDateTime.now(), sections);
+
+        menu.addDomainEvent(new MenuCreated(menu));
+        return menu;
     }
 
     public List<MenuSection> getSections() {
